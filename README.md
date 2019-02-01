@@ -72,8 +72,21 @@ Singleton：在Java中即指单例设计模式，它是软件开发中最常用�
 
 ### 总结
 - Override和Overload的区别？
-
 - Override重写的要求？（方法名、形参列表、返回值类型、抛出的异常列表、修饰符）
-
 - 了解《JVM虚拟机规范》中关于<clinit>和<init>方法的说明、invokespecial指令
 
+## 方法的参数传递机制
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/4.jpg)
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/5.jpg)
+
+### 考点
+- 方法的参数传递机制
+- String、包装类等对象的不可变性
+
+### 方法的参数传递机制
+#### 形参是基本数据类型
+- 传递数据值
+#### 实参是引用数据类型
+- 传递地址值
+- 特殊的类型：String、包装类等对象不可变性
