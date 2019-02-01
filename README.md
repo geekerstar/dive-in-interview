@@ -30,5 +30,50 @@ Singleton：在Java中即指单例设计模式，它是软件开发中最常用�
 - 如果是懒汉式，静态内部类形式最简单
 
 ## 类初始化和实例初始化
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/1.jpg)
 
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/2.jpg)
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/3.jpg)
+
+### 考点？
+- 类的初始化过程
+- 实例初始化过程
+- 方法的重写
+
+### 类初始化的过程
+#### 一个类要创建实例需要先加载并初始化该类
+- main方法所在的类需要先加载和初始化
+#### 一个子类要初始化需要先初始化父类
+#### 一个雷初始化就是执行<clinit>()方法
+- <clinit>()方法由静态类变量显示赋值代码和静态代码块组成
+- 类变量显示赋值代码和静态代码块代码从上到下顺序执行
+- <clinit>()方法只执行一次
+
+### 实例初始化过程
+#### 实例初始化就是执行<init>()方法
+- <init>()方法可能重载有多个，有几个构造器就有几个<init>方法
+- <init>()方法由非静态实例变量显示赋值代码和非静态代码块、对应构造器代码组成
+- 非静态实例变量显示赋值代码和非静态代码块代码从上到下顺序执行，而对应构造器的代码最后执行
+- 每次创建实例对象，调用对应构造器，执行的就是对应的<init>方法
+- <init>方法的首行是super()或super(实参列表)，即对应父类的<init>方法
+
+### 方法的重写Override
+#### 哪些方法不可以被重写
+
+- final方法
+- 静态方法
+- private等子类中不可见方法
+
+#### 对象的多态性
+- 子类如果重写了父类的方法，通过子类对象调用的一定是子类重写过的代码
+- 非静态方法默认的调用对象是this
+- this对象在构造器或者说<init>方法中就是正在创建的对象
+
+### 总结
+- Override和Overload的区别？
+
+- Override重写的要求？（方法名、形参列表、返回值类型、抛出的异常列表、修饰符）
+
+- 了解《JVM虚拟机规范》中关于<clinit>和<init>方法的说明、invokespecial指令
 
