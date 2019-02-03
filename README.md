@@ -267,7 +267,7 @@ TODO
 
 ### 运行级别（centos6)
 
-![](https://github.com/geekerstar/dive-in-interview/blob/master/img/10.png)
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/10.jpg)
 
 ### systemctl(centos7)
 注册在系统中的标准化程序
@@ -306,4 +306,11 @@ TODO
 - 先切换到主干 git checkout master
 - git branch -D <分支名>
 
+## Redis持久化
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/11.png)
 
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/12.jpg)
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/13.jpg)
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/14.jpg)
