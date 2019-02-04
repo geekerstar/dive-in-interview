@@ -248,6 +248,15 @@ public class Variable {
 ## SpringMVC中如何解决POST请求中文乱码问题
 TODO
 
+## Spring Bean的作用域之间有什么区别
+TODO
+
+## Spring支持的常用数据库事务传播属性
+TODO
+
+## 简单的谈一下SpringMVC的工作流程
+TODO
+
 ## Linux常用服务类相关命令
 ### Service（CentOS6）
 注册在系统中的标准化程序
@@ -314,3 +323,102 @@ TODO
 ![](https://github.com/geekerstar/dive-in-interview/blob/master/img/13.jpg)
 
 ![](https://github.com/geekerstar/dive-in-interview/blob/master/img/14.jpg)
+
+## 单点登录的实现
+
+- 单点登录：一处登录多处使用！
+- 前提：单点登录多使用在分布式系统中
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/15.jpg)
+
+```text
+Demo：
+参观动物园流程：
+检票员=认证中心模块
+1.	我直接带着大家进动物园，则会被检票员拦住【看我们是否有门票】，没有[售票处买票]
+登录=买票
+2.	我去买票【带着票，带着大家一起准备进入动物园】检票员check【有票】
+Token=piao
+3.	我们手中有票就可以任意观赏动物的每处景点。
+京东：单点登录，是将token放入到cookie中的。
+	案例：将浏览器的cookie禁用，则在登录京东则失败！无论如何登录不了！
+```
+
+## 购物车实现过程
+```text
+购物车：
+1.	购物车跟用户的关系?
+    a)	一个用户必须对应一个购物车【一个用户不管买多少商品，都会存在属于自己的购物车中。】
+    b)	单点登录一定在购物车之前。
+2.	跟购物车有关的操作有哪些?
+    a)	添加购物车
+        i.	用户未登录状态
+            1.	添加到什么地方?未登录将数据保存到什么地方?
+                a)	Redis? --- 京东
+                b)	Cookie? --- 自己开发项目的时候【如果浏览器禁用cookie】
+        ii.	用户登录状态
+            1.	Redis 缓存中 【读写速度快】
+                a)	Hash ：hset(key,field,value)
+                    i.	Key:user:userId:cart
+                    ii.	Hset(key,skuId,value);
+            2.	存在数据库中【oracle，mysql】
+     b)	展示购物车
+        i.	未登录状态展示
+            1.	直接从cookie 中取得数据展示即可
+        ii.	登录状态
+            1.	用户一旦登录：必须显示数据库【redis】+cookie 中的购物车的数据
+                a)	Cookie 中有三条记录
+                b)	Redis中有五条记录
+                c)	真正展示的时候应该是八条记录
+```
+
+## 消息队列在项目中的使用
+
+背景：在分布式系统中是如何处理高并发的。 	
+
+由于在高并发的环境下，来不及同步处理用户发送的请求，则会导致请求发生阻塞。比如说，大量的insert，update之类的请求同时到达数据库MYSQL，直接导致无数的行锁表锁，甚至会导致请求堆积很多。从而触发 too many connections 错误。使用消息队列可以解决【异步通信】
+
+1、异步
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/16.jpg)
+
+2、并行
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/17.jpg)
+
+3、排队
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/18.jpg)
+
+### 消息队列电商使用场景
+
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/19.jpg)
+
+### 消息队列的弊端：
+消息的不确定性：延迟队列，轮询技术来解决该问题即可！
+
+推荐大家使用activemq！环境都是java。
+
+## Elasticsearch 和 solr 的区别
+```text
+背景：它们都是基于Lucene搜索服务器基础之上开发，一款优秀的，高性能的企业级搜索服务器。【是因为他们都是基于分词技术构建的倒排索引的方式进行查询】
+开发语言：java语言开发
+诞生时间：
+Solr ：2004年诞生。
+Es：2010年诞生。
+Es 更新【功能越强大】
+
+区别：
+1.	当实时建立索引的时候，solr会产生io阻塞，而es则不会，es查询性能要高于solr。
+2.	在不断动态添加数据的时候，solr的检索效率会变的低下，而es则没有什么变化。
+3.	Solr利用zookeeper进行分布式管理，而es自身带有分布式系统管理功能。Solr一般都要部署到web服务器上，比如tomcat。启动tomcat的时候需要配置tomcat与solr的关联。【Solr 的本质 是一个动态web项目】
+4.	Solr支持更多的格式数据[xml,json,csv等]，而es仅支持json文件格式。
+5.	Solr是传统搜索应用的有力解决方案，但是es更适用于新兴的实时搜索应用。
+    a)	单纯的对已有数据进行检索的时候，solr效率更好，高于es。
+6.	Solr官网提供的功能更多，而es本身更注重于核心功能，高级功能多有第三方插件。
+
+```
+
+## Redis在项目中的使用场景
+![](https://github.com/geekerstar/dive-in-interview/blob/master/img/20.png)
+
